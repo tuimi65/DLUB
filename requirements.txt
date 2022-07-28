@@ -1,3 +1,4 @@
 pyrogram
 tgCrypto
 requests
+asyncio
