@@ -1,9 +1,7 @@
 import os
-import sys
 import shutil
-
-
 from pyrogram import Client, filters
+
 
 @Client.on_message(filters.me and filters.command(["purge"]))
 async def purge(client, message):
@@ -17,8 +15,6 @@ async def purge(client, message):
         else:
             text = "File Does Not Exist"
         await message.edit_text(text)
-         
-             
 
 @Client.on_message(filters.me and filters.command(["purgeall"]))
 async def purgeall(client, message):
@@ -26,6 +22,15 @@ async def purgeall(client, message):
         shutil.rmtree("downloads")
         text = "Purged All Cache!"
     except OSError as e:
-        text = "Folder Not Found!"
+        text = f"Folder Not Found! {e}"
     await message.edit_text(text)
+
+@Client.on_message(filters.me and filters.command(["list"]))
+def files(client, message):
+    _list = os.listdir("downloads")
+    try:
+        dirstr = [(f"-> {x}") for x in _list].join("\n")
+    except Exception:
+        dirstr = "Nothing Here Yet"
+    message.edit_text(dirstr)
         
