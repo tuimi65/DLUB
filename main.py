@@ -1,7 +1,6 @@
 from config import Bot
 from pyrogram import Client
 
-print(Bot.API_ID)
 plugins = dict(root="plugins")
 
 if __name__ == "__main__":
